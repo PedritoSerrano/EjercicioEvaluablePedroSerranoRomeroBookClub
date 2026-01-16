@@ -1,11 +1,9 @@
 package com.salesianostriana.dam.BookClubPedroSerranoRomero.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,13 +16,13 @@ import java.util.List;
 public class Usuario {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
     private String email;
 
-    @OneToMany
-    private List<Prestamo> prestamo;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Prestamo> prestamo = new ArrayList<>();
 
 }
